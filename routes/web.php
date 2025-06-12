@@ -9,6 +9,6 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 Route::get('/go/{urlx}', [GoController::class, 'gotolink']);
-Route::get('/tr/{urlx}', [LinkController::class, 'linkstrees']);
+Route::get('/link/{urlx}', [LinkController::class, 'linkstrees']);
 Route::get('/cert/{urlx}', [CertificateController::class, 'generate']);
 Route::get('/cert/val/{urlx}', [LinkController::class, 'linkstrees']);
