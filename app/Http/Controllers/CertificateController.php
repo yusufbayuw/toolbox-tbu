@@ -53,7 +53,7 @@ class CertificateController extends Controller
             'file_tandatangan' => Storage::disk('public')->url($certificate->file_tandatangan),//config('base_urls.base_cert').'/storage/'.$certificate->file_tandatangan,
             'qr_code_path' => config('base_urls.base_cert_val').'/'.$participant->uuid_val,
             'download_link' => config('base_urls.base_cert').'/'.$participant->uuid,
-            'background_image' => Storage::disk('ext')->url($certificate->background_image),
+            'background_image' => Storage::disk('public')->url($certificate->background_image),
         ];
 
         return view('certificate.validation', ['data' => $data]);

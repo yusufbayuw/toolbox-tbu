@@ -21,7 +21,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             align-items: center;
             height: 100vh;
             background-color: #f7f7f7;
-            background-image: url("{{ asset('images/certificate_template.png') }}");
+            background-image: url("{{ $background_image ?? asset('images/certificate_template.png') }}");
             background-size: cover;
             background-position: center;
         }

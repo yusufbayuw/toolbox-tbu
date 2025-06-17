@@ -36,14 +36,18 @@ class UserResource extends Resource
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required()
-                    ->maxLength(255),
+                    ->unique(ignoreRecord:true)
+                    ->dehydrateStateUsing(static fn (null|string $state): null|string => filled($state) ? Hash::make($state) : null,)
+                    ->dehydrated(static fn (null|string $state): bool => filled($state)),
                 Forms\Components\TextInput::make('logo')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\CheckboxList::make('roles')
+                Forms\Components\Select::make('roles')
                     ->relationship('roles', 'name')
-                    ->searchable(),
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->hidden(!auth()->user()?->hasRole('super-admin')),
             ]);
     }
 
