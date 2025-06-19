@@ -11,4 +11,4 @@ Route::get('/', function () {
 Route::get('/go/{urlx}', [GoController::class, 'gotolink']);
 Route::get('/link/{urlx}', [LinkController::class, 'linkstrees']);
 Route::get('/cert/{urlx}', [CertificateController::class, 'generate']);
-Route::get('/cert/val/{urlx}', [LinkController::class, 'linkstrees']);
+Route::get('/cert/val/{urlx}', [CertificateController::class, 'validate']);
