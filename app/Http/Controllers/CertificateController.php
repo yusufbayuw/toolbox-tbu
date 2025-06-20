@@ -25,7 +25,7 @@ class CertificateController extends Controller
             'nama_penandatangan' => $certificate->nama_penandatangan,
             'jabatan_penandatangan' => $certificate->jabatan_penandatangan,
             'file_tandatangan' => Storage::disk('public')->url($certificate->file_tandatangan),//config('base_urls.base_cert').'/storage/'.$certificate->file_tandatangan,
-            'qr_code_path' => $certificate->qrcode_val,
+            'qr_code_path' => Storage::disk('public')->url($certificate->qrcode_val),//config('base_urls.base_cert_val').'/'.$participant->uuid_val,
             'download_link' => config('base_urls.base_cert').'/'.$participant->uuid,
         ];
         //dompdf
