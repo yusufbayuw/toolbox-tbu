@@ -19,7 +19,7 @@ class CertificateParticipantObserver
 
         // Generate a unique QR code value
         $type = 'png';
-        $uuid = $certificateParticipant->uuid_val;
+        $uuid = $certificateParticipant->uuid_val . '.' . $type;
         $filepath = 'cert/'.date('Y') . '/' . date('m') . '/qr/' . $uuid;
 
         $qrCode = QrCode::size(500)
@@ -49,7 +49,11 @@ class CertificateParticipantObserver
      */
     public function deleted(CertificateParticipant $certificateParticipant): void
     {
-        //
+        $path = $certificateParticipant->qrcode_val;
+        // Delete the QR code file if it exists
+        if ($path && Storage::disk(config('base_urls.default_disk'))->exists($path)) {
+            Storage::disk(config('base_urls.default_disk'))->delete($path);
+        }
     }
 
     /**
