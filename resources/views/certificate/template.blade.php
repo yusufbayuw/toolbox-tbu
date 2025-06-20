@@ -157,7 +157,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                         </div>
 
                         <div class="qr-code">
-                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(256)->generate($qr_code_path)) !!}" alt="QR Code">
+                            <img src="{{$qr_code_path}}" alt="QR Code">
                         </div>
 
                         <div class="credit">
