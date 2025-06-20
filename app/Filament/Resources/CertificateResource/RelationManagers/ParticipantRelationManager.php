@@ -29,10 +29,6 @@ class ParticipantRelationManager extends RelationManager
                 Forms\Components\TextInput::make('asal_penerima')
                     ->maxLength(255)
                     ->default(null),
-                Tables\Columns\ImageColumn::make('qr_code_image')
-                    ->disk(config('base_urls.default_disk'))
-                    ->simpleLightbox()
-                    ->label('QR Validation'),
             ]);
     }
 
@@ -44,7 +40,10 @@ class ParticipantRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('nomor'),
                 Tables\Columns\TextColumn::make('nama_penerima'),
                 Tables\Columns\TextColumn::make('asal_penerima'),
-                Tables\Columns\TextColumn::make('asal_penerima'),
+                Tables\Columns\ImageColumn::make('qr_code_image')
+                    ->disk(config('base_urls.default_disk'))
+                    ->simpleLightbox()
+                    ->label('QR Validation'),
                 Tables\Columns\TextColumn::make('uuid')
                     ->label('Link')
                     ->formatStateUsing(fn() => "LINK")
