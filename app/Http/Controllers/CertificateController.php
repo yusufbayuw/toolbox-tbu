@@ -24,14 +24,15 @@ class CertificateController extends Controller
             'tanggal_penerbitan' => $certificate->tanggal_terbit,
             'nama_penandatangan' => $certificate->nama_penandatangan,
             'jabatan_penandatangan' => $certificate->jabatan_penandatangan,
-            'file_tandatangan' => Storage::disk('public')->url($certificate->file_tandatangan),//config('base_urls.base_cert').'/storage/'.$certificate->file_tandatangan,
-            'qr_code_path' => Storage::disk('public')->url($certificate->qrcode_val),//config('base_urls.base_cert_val').'/'.$participant->uuid_val,
+            'file_tandatangan' => Storage::disk('public')->url($certificate->file_tandatangan),
+            'qr_code_path' => Storage::disk('public')->url($certificate->qrcode_val),
             'download_link' => config('base_urls.base_cert').'/'.$participant->uuid,
         ];
+        return view('certificate.template', ['data' => $data]);
         //dompdf
-        $pdf = Pdf::loadView('certificate.template', $data)
-        ->setPaper('a4', 'landscape');
-        return $pdf->stream($certificate->jenis.'-'.$participant->nomor.'-'.$participant->nama_penerima.'.pdf');
+        //$pdf = Pdf::loadView('certificate.template', $data)
+        //->setPaper('a4', 'landscape');
+        //return $pdf->stream($certificate->jenis.'-'.$participant->nomor.'-'.$participant->nama_penerima.'.pdf');
 
     }
 
