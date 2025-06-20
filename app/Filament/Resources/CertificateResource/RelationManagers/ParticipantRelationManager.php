@@ -40,7 +40,7 @@ class ParticipantRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('nomor'),
                 Tables\Columns\TextColumn::make('nama_penerima'),
                 Tables\Columns\TextColumn::make('asal_penerima'),
-                Tables\Columns\ImageColumn::make('qr_code_image')
+                Tables\Columns\ImageColumn::make('qrcode_val')
                     ->disk(config('base_urls.default_disk'))
                     ->simpleLightbox()
                     ->label('QR Validation'),
