@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserObserver
 {
@@ -13,7 +14,12 @@ class UserObserver
     {
         // if user dont have any roles, assign role to user_panel
         if (!$user->hasAnyRole(['admin_tbu', 'super_admin', 'user_panel'])) {
-            $user->assignRole('user_panel');
+            try {
+                $user->assignRole('user_panel');
+            } catch (\Exception $e) {
+                // Handle the exception if assigning role fails
+                Log::error('Failed to assign role to user: ' . $e->getMessage());
+            }
         }
     }
 
