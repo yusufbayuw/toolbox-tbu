@@ -55,7 +55,6 @@ class CertificateParticipantResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nomor')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nama_penerima')
                     ->searchable(),

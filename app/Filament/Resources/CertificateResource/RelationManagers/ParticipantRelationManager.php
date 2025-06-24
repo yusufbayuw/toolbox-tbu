@@ -21,7 +21,6 @@ class ParticipantRelationManager extends RelationManager
                 Forms\Components\Hidden::make('certificate_id')
                     ->default($this->ownerRecord->id),
                 Forms\Components\TextInput::make('nomor')
-                    ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('nama_penerima')
                     ->maxLength(255)
