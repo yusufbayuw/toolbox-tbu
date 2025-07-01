@@ -13,13 +13,10 @@ class UserObserver
     public function created(User $user): void
     {
         // if user dont have any roles, assign role to user_panel
-        if (!$user->hasAnyRole(['admin_tbu', 'super_admin', 'user_panel'])) {
-            try {
-                $user->assignRole('user_panel');
-            } catch (\Exception $e) {
-                // Handle the exception if assigning role fails
-                Log::error('Failed to assign role to user: ' . $e->getMessage());
-            }
+        if ($user->hasAnyRole(['admin_tbu', 'super_admin', 'user_panel'])) {
+            // User already has one of the roles, do nothing
+        } else {
+            $user->assignRole('user_panel');
         }
     }
 
