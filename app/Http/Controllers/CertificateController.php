@@ -12,7 +12,16 @@ class CertificateController extends Controller
     public function generate(string $urlx) 
     {
         $participant = CertificateParticipant::where('uuid', $urlx)->first();
+
+        if (!$participant) {
+            abort(404);
+        }
+
         $certificate = $participant->certificate;
+
+        if (!$certificate) {
+            abort(404);
+        }
         
         $data = [
             'jenis_sertifikat' => $certificate->jenis,
@@ -39,7 +48,16 @@ class CertificateController extends Controller
     public function validate(string $urlx)
     {
         $participant = CertificateParticipant::where('uuid_val', $urlx)->first();
+
+        if (!$participant) {
+            abort(404);
+        }
+
         $certificate = $participant->certificate;
+
+        if (!$certificate) {
+            abort(404);
+        }
         
         $data = [
             'jenis_sertifikat' => $certificate->jenis,
