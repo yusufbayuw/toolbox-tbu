@@ -1,4 +1,3 @@
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 <!DOCTYPE html>
 <html lang="id">
 
@@ -24,6 +23,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             background-image: url("{{ $background_image ?? asset('images/certificate_template.png') }}");
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .certificate-header {
@@ -145,19 +145,23 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
                         <div class="recipient-name" id="recipientName">{{ $nama_penerima ?? ' ' }}</div>
                         <div class="recipient-org">{{ $asal_penerima ?? ' ' }}</div>
                         <div class="description">
-                            {{ $deskripsi_sertifikat ?? ' ' }}</strong>.
+                            {{ $deskripsi_sertifikat ?? ' ' }}.
                         </div>
 
 
                         <div class="signature">
                             <div class="details">{{ $lokasi ?? ' ' }}, {{ $tanggal_penerbitan ?? ' ' }}</div>
-                            <img src="{{ $file_tandatangan ?? ' ' }}">
+                            @if (!empty($file_tandatangan))
+                                <img src="{{ $file_tandatangan }}" alt="Tanda tangan">
+                            @endif
                             <p>{{ $nama_penandatangan ?? ' ' }}</p>
                             <p>{{ $jabatan_penandatangan ?? ' ' }}</p>
                         </div>
 
                         <div class="qr-code">
-                            <img src="{{$qr_code_path}}" alt="QR Code">
+                            @if (!empty($qr_code_path))
+                                <img src="{{ $qr_code_path }}" alt="QR Code">
+                            @endif
                         </div>
 
                         <div class="credit">
