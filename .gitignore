@@ -27,4 +27,3 @@ toolbox
 # Local-only license assets
 /LICENSE_SETUP.md
 *.pem
-/bootstrap/cache/config_validation.php
