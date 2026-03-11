@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Auth\Login;
+use App\Http\Middleware\VerifyConfigIntegrity;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -49,6 +50,7 @@ class AdminPanelProvider extends PanelProvider
                 //Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
+                VerifyConfigIntegrity::class,
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,

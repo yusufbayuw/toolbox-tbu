@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\LinkTheme;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class LinkController extends Controller
 {
     public function linkstrees(string $urlx)
     {
-        $linkx = Link::where('url_slug', $urlx)->first();
-        $variable = LinkTheme::find($linkx->theme_id);
+        $linkx = Link::with('theme')->where('url_slug', $urlx)->firstOrFail();
+        $theme = $linkx->theme;
+
         $colorList = [
             'slate' => ['rgb(226 232 240);', 'rgb(100 116 139);', 'rgb(30 41 59);', 'rgb(15 23 42);',],
             'gray' => ['rgb(229 231 235);', 'rgb(107 114 128);', 'rgb(31 41 55);', 'rgb(17 24 39);',],
@@ -38,11 +38,20 @@ class LinkController extends Controller
             'rose' => ['rgb(254 205 211);', 'rgb(244 63 94);', 'rgb(159 18 57);', 'rgb(136 19 55);',],
         ];
 
-        $logo = Storage::disk('public')->url($linkx->logo);
+        $paletteKey = $theme?->variables;
+        $selectedColors = $colorList[$paletteKey] ?? $colorList['slate'];
+        $palette = [
+            'surface' => rtrim($selectedColors[0], ';'),
+            'accent' => rtrim($selectedColors[1], ';'),
+            'strong' => rtrim($selectedColors[2], ';'),
+            'strong_hover' => rtrim($selectedColors[3], ';'),
+        ];
+
+        $logo = $linkx->logo ? Storage::disk('public')->url($linkx->logo) : null;
 
         return view('tree', [
             'linkx' => $linkx,
-            'variable' => $colorList[$variable->variables],
+            'palette' => $palette,
             'logo' => $logo,
         ]);
     }

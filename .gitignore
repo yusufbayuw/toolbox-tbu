@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/app/license.key
 /storage/pail
 /vendor
 .env
@@ -22,3 +23,8 @@ yarn-error.log
 /.vscode
 /.zed
 toolbox
+
+# Local-only license assets
+/LICENSE_SETUP.md
+*.pem
+/bootstrap/cache/config_validation.php

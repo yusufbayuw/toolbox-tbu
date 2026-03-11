@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\License\LicenseService;
+use App\Support\SystemBoot;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(SystemBoot::class, fn () => new SystemBoot());
+        $this->app->singleton(LicenseService::class, fn ($app) => new LicenseService($app->make(SystemBoot::class)));
     }
 
     /**
