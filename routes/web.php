@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\GoController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\LinkController;
@@ -20,4 +21,8 @@ Route::middleware(VerifyConfigIntegrity::class)->group(function () {
     Route::get('/link/{urlx}', [LinkController::class, 'linkstrees']);
     Route::get('/cert/{urlx}', [CertificateController::class, 'generate']);
     Route::get('/cert/val/{urlx}', [CertificateController::class, 'validate']);
+    Route::get('/card/demo/template', [CardController::class, 'demoTemplate']);
+    Route::get('/card/demo/pdf', [CardController::class, 'demoPdf']);
+    Route::get('/card/{urlx}', [CardController::class, 'generate']);
+    Route::get('/card/val/{urlx}', [CardController::class, 'validate']);
 });

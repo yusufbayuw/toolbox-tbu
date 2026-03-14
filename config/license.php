@@ -14,5 +14,9 @@ return [
         'resources/views/tree.blade.php',
         'resources/views/certificate/validation.blade.php',
         'resources/views/certificate/template.blade.php',
+        'app/Http/Controllers/CardController.php',
+        'app/Filament/Resources/CardResource.php',
+        'resources/views/card/validation.blade.php',
+        'resources/views/card/template.blade.php',
     ],
 ];

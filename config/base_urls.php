@@ -10,6 +10,10 @@ return [
 
     'base_cert_val' => env('BASE_CERT_VAL', 'https://doc.tbu.ac.id/cert/val'),
 
+    'base_card' => env('BASE_CARD', 'https://doc.tbu.ac.id/card'),
+
+    'base_card_val' => env('BASE_CARD_VAL', 'https://doc.tbu.ac.id/card/val'),
+
     'default_disk' => 'public',
 
     'login_turnstile' => env('LOGIN_TURNSTILE', false),

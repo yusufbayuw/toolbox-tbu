@@ -39,7 +39,11 @@ class CertificateController extends Controller
         //dompdf
         $pdf = Pdf::loadView('certificate.template', $data)
         ->setPaper('a4', 'landscape');
-        return $pdf->stream($certificate->jenis.'-'.$participant->nomor.'-'.$participant->nama_penerima.'.pdf');
+        return $pdf->stream($this->safeDownloadFilename(
+            $certificate->jenis,
+            (string) $participant->nomor,
+            $participant->nama_penerima
+        ));
 
     }
 
@@ -93,5 +97,23 @@ class CertificateController extends Controller
         $contents = $disk->get($path);
 
         return 'data:'.$mimeType.';base64,'.base64_encode($contents);
+    }
+
+    private function safeDownloadFilename(?string ...$parts): string
+    {
+        $segments = collect($parts)
+            ->filter()
+            ->map(function (string $part): string {
+                $sanitized = preg_replace('/[\\\\\\/\\:\\*\\?\\\"\\<\\>\\|]+/', '-', $part);
+                $sanitized = preg_replace('/\\s+/', ' ', $sanitized ?? '');
+
+                return trim($sanitized, " .-\t\n\r\0\x0B");
+            })
+            ->filter()
+            ->values();
+
+        $filename = $segments->isNotEmpty() ? $segments->implode('-') : 'certificate';
+
+        return $filename.'.pdf';
     }
 }
